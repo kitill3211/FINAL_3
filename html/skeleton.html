@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html class="no-js" lang="">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Anatomy Viewer</title>
+
+    <!-- Common packages: JQuery & Bootstrap -->
+    <link rel="shortcut icon" href="images/favicon.png" type="image/png">
+    <link rel="stylesheet" href="https://developer.api.autodesk.com/modelderivative/v2/viewers/style.min.css?v=v3.3.*" type="text/css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.4/themes/flick/jquery-ui.css">
+    <link rel="stylesheet" href="https://autodeskviewer.com/viewers/2.9/style.css?v=v2.9">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/style-desktop.css">
+    <link rel="stylesheet" href="css/font-awesome.css" >
+    <link rel="stylesheet" href="css/Button.css">
+    <link rel="stylesheet" href="css/Viewer.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/moment.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="https://autodeskviewer.com/viewers/2.9/viewer3D.min.js?v=v2.9"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
+    <script src="js/jquery.qrcode.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/Autodesk.ADN.Toolkit.ViewData.js"></script>
+    <script src="js/vr-party-common.js"></script>
+    <script src="js/vr-party-presenter.js"></script>
+    <!-- Viewer production -->
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/three.min.js?v=v3.3.*"></script>
+    <script src="https://developer.api.autodesk.com/modelderivative/v2/viewers/viewer3D.min.js?v=v3.3.*"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="js/skel.min.js"></script>
+    <script src="js/skel-panels.min.js"></script>
+    <script src="js/init.js"></script>
+    
+    <!-- The Viewer Extensions -->
+    <!--<script src="/extensions/Viewing.Extension.Markup3D.min.js"></script>-->
+    <!--<script src="/extensions/Viewing.Extension.Transform.min.js"></script>-->
+    <!--<script src="/extensions/_Viewing.Extension.ControlSelector.min.js"></script>-->
+
+    <!-- The Viewer JS -->
+<!--
+    <script src="js/oauth.js"></script>
+    <script src="js/index.js"></script>
+-->
+    
+<!--    js-скрипт названия-->
+    <script src="extensions/Autodesk.ADN.Viewing.Extension.ModelStructure.js"></script> 
+<!--    подключение json-->
+    <script src="js/ObjectInformation.json"></script>
+        <script type="text/javascript">
+            function json(){
+                $.ajax({            
+                    url: 'js/ObjectInformation.json',
+                    success: function(data){
+                    console.log('!!!!!!!!!!!!!!!!!!!!!1success '+data.data[0] );
+                    }
+                });
+        } ;
+        json();
+                
+</script>
+    
+
+</head>
+    	<body onload="initialize();" onbeforeunload="terminate();" onresize="resize();">
+		<!-- Header -->
+		<div id="header-wrapper">
+		
+        	<div id="header" class="container">
+            
+            	<div id="logo"><h1><a href="http://www.ifmo.ru/ru/">ITMO</a></h1></div>
+                <nav id="nav">
+                    <ul>
+                        <li class="current_page_item"><a href="index.html">Главная</a></li>
+                        <li><a href="aboutprogect.html">О проекте</a></li>
+                        <li><a href="contacts.html">Контакты</a></li>
+                        <li><a href="login.html">Авторизация</a></li>
+                    </ul>
+                </nav>
+                
+            </div>
+		</div>
+		<!-- Header Ends Here -->
+
+		<!-- Page -->
+        
+        	<div id="page">
+            	<div class="container">
+                	<div class="row">
+                    
+                    	<div id="sidebar" class="4u">
+                            <section id="box2">
+                                <ul class="style2">
+                                    <li class="first">
+                                        <a href="#"><div onClick="chooseModel(2)"><img src="images/skelet1.png"></div></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><div onClick="chooseModel(3)"><img src="images/skelet2.png"></div>
+                                        </a>
+                                            </li>
+                                    <li>
+                                        <a href="#"><div><img src="images/skelet3.png"></div></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><div><img src="images/skelet5.png"></div></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><div><img src="images/skelet4.png"></div></a>
+                                    </li>
+                                </ul>
+                                
+                            </section>
+                        </div>
+                        
+                    	<div id="content" class="8u skel-cell-important">
+                            
+                            <div id="ViewerWrapper"><div class="center-block" id="3dViewDiv"></div></div>  
+                                
+                                <div class="myButton" id="background" onClick="Property()">НАЗВАНИЯ КОСТЕЙ</div>
+<!--                            <a href="https://stormy-escarpment-67754.herokuapp.com/?session=GQcJGb" target="_blank" class="myButton" >СТРИМ</a>-->
+                            <input type="button" class="myButton" value="VR" onclick="giveQr3D()">
+                            <input type="button" class="myButton" value="Демонстрация" onclick="giveQr()">
+                            <br/>
+                            <a id="url" target="_blank" title="Scan this QR code to connect to this session from your mobile device. "><div id="qrcode"></div></a>
+                    <a id="urlVR" target="_blankVR" title="Scan this QR code to connect to this session from your mobile device. VR"><div id="qrcodeVR"></div></a>
+<!--                            <div id="restart-button" type="button" class="myButton" onclick="window.location.href = window.location.origin;">New session</div>-->
+                              <!--  <ul class="style5"><a href="https://stormy-escarpment-67754.herokuapp.com/?session=GQcJGb" target="_blank" class="myButton" >СТРИМ</a>
+                                    <li><a href="#">Integer sit amet pede vel arcu aliquet pretium.</a></li>
+                                    <li><a href="#">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</a></li>
+                                    <li><a href="#">Phasellus nec erat sit amet nibh pellentesque congue.</a></li>
+                                    <li><a href="#">Pellentesque quis elit non lectus gravida blandit.</a></li>
+                                    <li><a href="#">Maecenas vitae orci vitae tellus feugiat eleifend.</a></li>
+                                </ul> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+		<!-- /Page -->
+
+		<!-- Copyright -->
+            <div id="copyright" class="container">
+                <a href="https://developer.autodesk.com" target="_blank">© 2018 Autodesk Inc.</a> All rights reserved.
+            </div>
+	</body>
+</html>

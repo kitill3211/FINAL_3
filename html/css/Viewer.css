@@ -1,0 +1,8 @@
+#ViewerWrapper {
+  height: 680px; 
+  background-color:dimgrey;
+  width: 860px; 
+  margin-top: 50px;
+  overflow: hidden; 
+  position: relative;
+}

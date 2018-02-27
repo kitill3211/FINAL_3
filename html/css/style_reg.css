@@ -1,0 +1,81 @@
+body {
+    background-image: url(../images/1488695050197190088.jpg)
+} 
+
+
+.container{
+ width:450px;
+ background-color: rgba(255, 153, 0, 0.4);
+ margin: 130px 180px;
+ text-align: center;
+ box-shadow: 0 -5px 0 #ffd11a;
+ border-radius: 0 0 10px 10px;
+  padding-bottom: 10px;
+ 
+} 
+
+.container img{
+ width:120px;
+ height:120px;
+ margin: -60px 0 30px 0;
+ border: 5px solid #ffff80;
+ border-radius: 50%;
+ box-shadow: 0 -5px 0 #ffd11a;
+}    
+
+
+input[type="text"],input[type="password"]{
+ width: 300px;
+ height:50px;
+ font-size: 18px;
+ margin-bottom: 25px;
+ border-radius: 4px;
+ padding-left: 40px;
+}    
+
+.acept {
+ padding: 13px 30px;
+ margin: 5px 0 20px 0;
+ font-size: 15px;
+ color: #fff;
+ background-color: #ffd11a;
+ border: none;
+ border-bottom: 4px solid #ffff00;
+ cursor: pointer;
+ } 
+    
+.acept:hover{
+ transition: all 0.5s;
+ background: #fff;
+ color: #ffd11a;
+}   
+
+.dws-input::before{
+ font-family: "FontAwesome";
+ content: "\f007";
+ position: absolute;
+ font-size: 30px;
+ padding: 10px 0 0 7px;
+ color: #ff9900;
+}    
+
+.dws-input:nth-child(2)::before{
+content: "\f023";
+}   
+
+.dws-input:nth-child(3)::before{
+content: "\f023";
+}   
+
+.dws-input:nth-child(4)::before{
+content: "\f199";
+}    
+
+.dws-input input:hover{
+ box-shadow: 0 0 6px 3px rgba(255, 255, 153, 0.35);
+}    
+
+.dws-input:hover::before{
+    color: #cc6600;
+    transition: all 0.3s;
+}    
